@@ -1,26 +1,125 @@
+
 @import "tailwindcss";
 
+@theme {
+  --font-bebas: 'Bebas Neue', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --font-mono: 'Roboto Condensed', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', monospace;
+  --font-sans: 'Roboto Condensed', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --rust-green: #6d8e48;
+  --rust-green-hover: #7b9f52;
+  --rust-orange: #d2501a;
+  --rust-bg: rgba(20, 20, 25, 0.7);
+  --rust-border: rgba(255, 255, 255, 0.1);
+  --rust-highlight: rgba(255, 255, 255, 0.05);
+  --text-muted: #888888;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: #ddd;
+  font-family: 'Roboto Condensed', sans-serif;
+  overflow: hidden;
+}
+
+/* 
+ * 1. Background Image (Rust Theme 2024 - High Def, slight pan)
+ */
+.bg-rust-theme {
+  position: absolute;
+  inset: -2%;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(210, 80, 26, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(139, 90, 43, 0.1) 0%, transparent 50%);
+  background-color: #121212;
+  background-position: center;
+  animation: bgPan 120s infinite alternate linear;
+  z-index: -1;
+}
+
+@keyframes bgPan {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.05) translate(-1%, -1%); }
+}
+
+/* 
+ * 2. Frosted Glass UI (New 2024 Style)
+ */
+.rust-glass {
+  background: rgba(25, 25, 30, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.rust-glass-panel {
+  background: rgba(15, 15, 18, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+.rust-nav-btn {
+  font-family: 'Bebas Neue', cursive;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.rust-nav-btn.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+.rust-nav-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #fff;
+  box-shadow: 0 0 10px #fff;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Inputs */
+.rust-input {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: border-color 0.2s;
+}
+.rust-input:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+  outline: none;
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 24px);
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
