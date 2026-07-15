@@ -1,6 +1,12 @@
+import { Metadata } from 'next';
 import { ServerList } from '@/components/ServerList';
 
-export default async function Page() {
+export const metadata: Metadata = {
+  title: '社区服/官服实时状态查询',
+  description: '实时查询 Rust 社区服务器、官方服务器和 Mod 服的状态、人数和 Wipe 时间。',
+};
+
+export default async function ServersPage() {
   let initialServers = [];
   try {
     const res = await fetch('https://api.battlemetrics.com/servers?filter[game]=rust&sort=-players&page[size]=100', { 

@@ -3,8 +3,17 @@ import "./globals.css";
 import { ClientLayout } from "@/components/ClientLayout";
 
 export const metadata: Metadata = {
-  title: "Rust Tactical Calculator",
-  description: "Rust Survival Command Center",
+  title: {
+    template: "%s | Rust Tactical",
+    default: "Rust Tactical | 腐蚀战术指挥中心",
+  },
+  description: "全方位 Rust 生存战术辅助平台。提供实时社区服官服查询、抄家炸药计算器、蓝图物资模拟、以及顶级战术资源规划。",
+  keywords: ["Rust", "腐蚀", "抄家计算器", "服务器查询", "Rust Tactical", "游戏辅助"],
+  openGraph: {
+    title: "Rust Tactical | 腐蚀战术指挥中心",
+    description: "最硬核的 Rust 全栈生存辅助系统",
+    type: "website",
+  },
   icons: {
     icon: '/favicon.svg',
   },
