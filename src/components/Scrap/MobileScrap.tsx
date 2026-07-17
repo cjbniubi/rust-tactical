@@ -13,114 +13,98 @@ export const MobileScrap = (props: any) => {
     } = props;
 
     return (
-        <div className="lg:hidden flex flex-col h-full bg-[#0f0f12] pb-[80px] overflow-y-auto w-full relative">
-            <div className="flex-none p-4 sticky top-0 bg-[rgba(15,15,18,0.95)] backdrop-blur z-20 border-b border-[rgba(255,255,255,0.05)] shadow-sm">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <Recycle className="text-[#cd4916]" size={20} />
-                        <div>
-                            <h1 className="text-lg font-bold font-sans text-white leading-none">废料分解</h1>
-                            <p className="text-[#888] text-[10px] mt-1 uppercase">Scrap Breakdown</p>
-                        </div>
-                    </div>
+        <div className="lg:hidden flex flex-col h-full bg-[#0f0f12] overflow-hidden w-full relative">
+            
+            {/* STICKY CONTROL TERMINAL */}
+            <div className="flex-none sticky top-0 bg-[rgba(15,15,18,0.98)] backdrop-blur-md z-30 border-b border-[rgba(255,255,255,0.05)] shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+                {/* Header */}
+                <div className="flex items-center gap-2 p-4 pb-2">
+                    <Recycle className="text-[#cd4916]" size={18} />
+                    <h1 className="text-base font-bold font-sans text-white leading-none tracking-widest">战术分解终端</h1>
                 </div>
-            </div>
 
-            <div className="flex-1 p-4 flex flex-col gap-8">
-                {/* Step 1: Input & Purchase */}
-                <section>
-                    <div className="flex items-center gap-2 mb-4">
-                        <div className="w-6 h-6 rounded-full bg-[#cd4916] flex items-center justify-center text-white font-bold text-xs">1</div>
-                        <h2 className="text-sm font-bold text-white">废料输入与购买</h2>
-                    </div>
-                    
-                    <div className="bg-[rgba(0,0,0,0.3)] border border-[rgba(255,255,255,0.05)] rounded p-4 mb-4">
-                        <label className="text-[#888] text-[10px] font-bold mb-3 flex items-center gap-2">
-                            <Image src="/rust-icon/resources/scrap.png" alt="Scrap" width={16} height={16} />
-                            总废料投入 (SCRAP)
+                {/* Compact Inputs */}
+                <div className="px-4 pb-4 flex gap-3">
+                    <div className="flex-1 bg-[rgba(0,0,0,0.4)] border border-[rgba(255,255,255,0.1)] rounded p-2">
+                        <label className="text-[#888] text-[9px] font-bold mb-1 flex items-center gap-1">
+                            <Image src="/rust-icon/resources/scrap.png" alt="Scrap" width={12} height={12} />
+                            目标废料 (SCRAP)
                         </label>
                         <input 
                             type="number"
                             value={scrap || ''}
                             onChange={(e) => handleScrapInput(e.target.value)}
                             placeholder="0"
-                            className="w-full bg-[rgba(0,0,0,0.5)] border border-[rgba(255,255,255,0.1)] rounded p-3 text-white font-mono text-2xl outline-none focus:border-[#cd4916] transition-colors"
+                            className="w-full bg-transparent text-white font-mono text-xl outline-none"
                         />
                     </div>
-
-                    <div className="flex flex-col gap-2 relative">
-                        <div className="absolute left-6 top-0 bottom-0 w-px bg-dashed border-l-2 border-dashed border-[#333] -z-10"></div>
-                        
-                        <div className="bg-[rgba(0,0,0,0.4)] border border-[#333] rounded p-3 flex items-center gap-3">
-                            <Image src="/rust-icon/weapons/grenade.f1.png" alt="F1" width={32} height={32} />
-                            <div className="flex-1">
-                                <div className="text-[10px] text-[#888]">购买 F1 手雷</div>
-                                <div className="font-bebas text-2xl text-white leading-none mt-1">{f1Count}</div>
-                            </div>
-                            <div className="text-[10px] text-[#cd4916] font-mono">{grenadeCost} scrap/个</div>
-                        </div>
-
-                        <div className="bg-[rgba(0,0,0,0.4)] border border-[#333] rounded p-3 flex items-center gap-3">
-                            <Image src="/rust-icon/weapons/weapon.mod.8x.scope.png" alt="16x" width={32} height={32} />
-                            <div className="flex-1">
-                                <div className="text-[10px] text-[#888]">购买 16倍镜</div>
-                                <div className="font-bebas text-2xl text-white leading-none mt-1">{scopeCount}</div>
-                            </div>
-                            <div className="text-[10px] text-[#cd4916] font-mono">{scopeCost} scrap/个</div>
-                        </div>
-                    </div>
-                </section>
-
-                <div className="w-full h-px bg-[rgba(255,255,255,0.05)]"></div>
-
-                {/* Step 2: Recycle Output */}
-                <section>
-                    <div className="flex items-center gap-2 mb-4">
-                        <div className="w-6 h-6 rounded-full bg-[#cd4916] flex items-center justify-center text-white font-bold text-xs">2</div>
-                        <h2 className="text-sm font-bold text-white">分解机产出</h2>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                        <div className="bg-[#1a1a1a] border border-[#333] rounded p-4 flex flex-col items-center">
-                            <Image src="/rust-icon/resources/gunpowder.png" alt="GP" width={40} height={40} className="mb-2" />
-                            <span className="text-[#888] text-[10px] mb-1">获得火药 (GP)</span>
-                            <span className="font-bebas text-2xl text-[#ffaa00]">{gunpowder}</span>
-                        </div>
-                        <div className="bg-[#1a1a1a] border border-[#333] rounded p-4 flex flex-col items-center">
-                            <Image src="/rust-icon/resources/metal.fragments.png" alt="Metal" width={40} height={40} className="mb-2" />
-                            <span className="text-[#888] text-[10px] mb-1">获得金属碎片</span>
-                            <span className="font-bebas text-2xl text-[#aaa]">{f1Metal}</span>
-                        </div>
-                        <div className="bg-[#1a1a1a] border border-[#333] rounded p-4 flex flex-col items-center col-span-2">
-                            <Image src="/rust-icon/resources/metal.refined.png" alt="HQM" width={40} height={40} className="mb-2" />
-                            <span className="text-[#888] text-[10px] mb-1">获得高面金 (HQM)</span>
-                            <span className="font-bebas text-2xl text-[#00ffcc]">{scopeHqm}</span>
-                        </div>
-                    </div>
-                </section>
-
-                <div className="w-full h-px bg-[rgba(255,255,255,0.05)]"></div>
-
-                {/* Step 3: Explosives Crafting */}
-                <section>
-                    <div className="flex items-center gap-2 mb-4">
-                        <div className="w-6 h-6 rounded-full bg-[#cd4916] flex items-center justify-center text-white font-bold text-xs">3</div>
-                        <h2 className="text-sm font-bold text-white">火药转化库</h2>
-                    </div>
                     
-                    <div className="bg-[rgba(0,0,0,0.3)] border border-[rgba(255,255,255,0.05)] rounded p-4 mb-4">
-                        <label className="text-[#888] text-[10px] font-bold mb-3 flex items-center gap-2">
-                            <Image src="/rust-icon/resources/gunpowder.png" alt="GP" width={16} height={16} />
-                            用于制造炸药的火药总量 (GP)
-                        </label>
+                    <div className="flex-1 bg-[rgba(0,0,0,0.4)] border border-[#ffaa00] border-opacity-30 rounded p-2">
+                        <div className="flex justify-between items-center mb-1">
+                            <label className="text-[#ffaa00] text-[9px] font-bold flex items-center gap-1">
+                                <Image src="/rust-icon/resources/gunpowder.png" alt="GP" width={12} height={12} />
+                                制造投入 (GP)
+                            </label>
+                            <button 
+                                onClick={() => handleGpInput(gunpowder.toString())}
+                                className="text-[#ffaa00] text-[8px] bg-[rgba(255,170,0,0.1)] px-1.5 py-0.5 rounded"
+                            >
+                                MAX
+                            </button>
+                        </div>
                         <input 
                             type="number"
                             value={gpInput}
                             onChange={(e) => handleGpInput(e.target.value)}
-                            placeholder={`可用火药: ${gunpowder}`}
-                            className="w-full bg-[rgba(0,0,0,0.5)] border border-[#ffaa00] border-opacity-30 rounded p-3 text-[#ffaa00] font-mono text-xl outline-none focus:border-opacity-100 transition-colors"
+                            placeholder="0"
+                            className="w-full bg-transparent text-[#ffaa00] font-mono text-xl outline-none"
                         />
                     </div>
+                </div>
+            </div>
 
+            {/* SCROLLABLE CONTENT */}
+            <div className="flex-1 p-4 pb-24 overflow-y-auto custom-scrollbar flex flex-col gap-6">
+                
+                {/* Compact Yields List */}
+                <section>
+                    <h2 className="text-[#888] text-[10px] font-bold tracking-widest uppercase mb-3 border-b border-[#333] pb-1">转换提炼核心流水线</h2>
+                    
+                    <div className="flex flex-col gap-2">
+                        {/* F1 Route */}
+                        <div className="bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] rounded p-3 flex items-center gap-3">
+                            <Image src="/rust-icon/weapons/grenade.f1.png" alt="F1" width={28} height={28} />
+                            <div className="flex-1 flex flex-col">
+                                <span className="text-[#888] text-[9px]">前哨站购买凭证</span>
+                                <span className="text-white font-bold text-sm leading-tight">{f1Count}x F1手雷</span>
+                            </div>
+                            <div className="text-[#555]">➔</div>
+                            <div className="flex flex-col items-end">
+                                <span className="text-[#ffaa00] text-[9px]">提炼火药</span>
+                                <span className="font-bebas text-2xl text-[#ffaa00] leading-none">{gunpowder}</span>
+                            </div>
+                        </div>
+
+                        {/* 16x Route */}
+                        <div className="bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] rounded p-3 flex items-center gap-3">
+                            <Image src="/rust-icon/weapons/weapon.mod.8x.scope.png" alt="16x" width={28} height={28} />
+                            <div className="flex-1 flex flex-col">
+                                <span className="text-[#888] text-[9px]">前哨站购买凭证</span>
+                                <span className="text-white font-bold text-sm leading-tight">{scopeCount}x 16倍镜</span>
+                            </div>
+                            <div className="text-[#555]">➔</div>
+                            <div className="flex flex-col items-end">
+                                <span className="text-[#00ffcc] text-[9px]">提炼高面金</span>
+                                <span className="font-bebas text-2xl text-[#00ffcc] leading-none">{scopeHqm}</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Explosives Grid */}
+                <section>
+                    <h2 className="text-[#ff4444] text-[10px] font-bold tracking-widest uppercase mb-3 border-b border-[#442222] pb-1">武器库炸药成型</h2>
+                    
                     <div className="grid grid-cols-2 gap-3">
                         <GpCraftCard name="C4 炸药包" count={c4Count} cost="1000 GP" color="#ff4444" iconSrc="/rust-icon/tools/explosive.timed.png" />
                         <GpCraftCard name="火箭弹 (Rocket)" count={rocketCount} cost="650 GP" color="#ff8800" iconSrc="/rust-icon/ammmo/ammo.rocket.basic.png" />
