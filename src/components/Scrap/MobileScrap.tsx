@@ -7,9 +7,9 @@ import Image from 'next/image';
 
 export const MobileScrap = (props: any) => {
     const {
-        scrap, gpInput, f1Count, gunpowder, f1Metal, scopeCount, scopeHqm,
+        scrap, f1Count, gunpowder, f1Metal, scopeCount, scopeHqm,
         c4Count, rocketCount, satchelCount, expAmmoCount, grenadeCost, scopeCost,
-        handleScrapInput, handleGpInput
+        handleScrapInput
     } = props;
 
     return (
@@ -36,28 +36,6 @@ export const MobileScrap = (props: any) => {
                             onChange={(e) => handleScrapInput(e.target.value)}
                             placeholder="0"
                             className="w-full bg-transparent text-white font-mono text-xl outline-none"
-                        />
-                    </div>
-                    
-                    <div className="flex-1 bg-[rgba(0,0,0,0.4)] border border-[#ffaa00] border-opacity-30 rounded p-2">
-                        <div className="flex justify-between items-center mb-1">
-                            <label className="text-[#ffaa00] text-[9px] font-bold flex items-center gap-1">
-                                <Image src="/rust-icon/resources/gunpowder.png" alt="GP" width={12} height={12} />
-                                制造投入 (GP)
-                            </label>
-                            <button 
-                                onClick={() => handleGpInput(gunpowder.toString())}
-                                className="text-[#ffaa00] text-[8px] bg-[rgba(255,170,0,0.1)] px-1.5 py-0.5 rounded"
-                            >
-                                MAX
-                            </button>
-                        </div>
-                        <input 
-                            type="number"
-                            value={gpInput}
-                            onChange={(e) => handleGpInput(e.target.value)}
-                            placeholder="0"
-                            className="w-full bg-transparent text-[#ffaa00] font-mono text-xl outline-none"
                         />
                     </div>
                 </div>

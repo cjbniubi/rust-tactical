@@ -12,7 +12,6 @@ export const useScrap = () => {
     const scrap = hydrated ? store.scrap : 0;
     const updateMaterial = store.updateMaterial;
     
-    const [gpInput, setGpInput] = useState<string>('');
 
     const grenadeCost = 8;
     const f1Count = Math.floor(scrap / grenadeCost);
@@ -23,24 +22,19 @@ export const useScrap = () => {
     const scopeCount = Math.floor(scrap / scopeCost);
     const scopeHqm = scopeCount * 40; 
 
-    const gpAmount = parseInt(gpInput) || 0;
-    const c4Count = Math.floor(gpAmount / 1000);
-    const rocketCount = Math.floor(gpAmount / 650);
-    const satchelCount = Math.floor(gpAmount / 240);
-    const expAmmoCount = Math.floor(gpAmount / 2.5);
+    const c4Count = Math.floor(gunpowder / 1000);
+    const rocketCount = Math.floor(gunpowder / 650);
+    const satchelCount = Math.floor(gunpowder / 240);
+    const expAmmoCount = Math.floor(gunpowder / 2.5);
 
     const handleScrapInput = (val: string) => {
         const num = parseInt(val) || 0;
         updateMaterial('scrap', num);
     };
 
-    const handleGpInput = (val: string) => {
-        setGpInput(val);
-    };
 
     return {
         scrap,
-        gpInput,
         f1Count,
         gunpowder,
         f1Metal,
@@ -52,7 +46,6 @@ export const useScrap = () => {
         expAmmoCount,
         grenadeCost,
         scopeCost,
-        handleScrapInput,
-        handleGpInput
+        handleScrapInput
     };
 };

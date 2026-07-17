@@ -8,9 +8,9 @@ import Image from 'next/image';
 
 export const DesktopScrap = (props: any) => {
     const {
-        scrap, gpInput, f1Count, gunpowder, f1Metal, scopeCount, scopeHqm,
+        scrap, f1Count, gunpowder, f1Metal, scopeCount, scopeHqm,
         c4Count, rocketCount, satchelCount, expAmmoCount, grenadeCost, scopeCost,
-        handleScrapInput, handleGpInput
+        handleScrapInput
     } = props;
 
     return (
@@ -117,25 +117,11 @@ export const DesktopScrap = (props: any) => {
                         </div>
                         
                         <div className="bg-[rgba(0,0,0,0.3)] border border-[rgba(255,255,255,0.05)] rounded-lg p-6">
-                            <label className="text-[#888] text-sm font-bold mb-4 block flex items-center gap-2">
+                            <label className="text-[#888] text-sm font-bold mb-2 block flex items-center gap-2">
                                 <Image src="/rust-icon/resources/gunpowder.png" alt="GP" width={24} height={24} />
-                                制造投入 (GP)
+                                衍生可用火药 (GP)
                             </label>
-                            <div className="flex items-center gap-3">
-                                <input 
-                                    type="number"
-                                    value={gpInput}
-                                    onChange={(e) => handleGpInput(e.target.value)}
-                                    placeholder={`默认使用: ${gunpowder}`}
-                                    className="w-full bg-[rgba(0,0,0,0.5)] border border-[rgba(255,255,255,0.1)] rounded p-4 text-[#ffaa00] font-mono text-3xl outline-none focus:border-[#ff4444] transition-colors"
-                                />
-                                <button 
-                                    onClick={() => handleGpInput(gunpowder.toString())}
-                                    className="h-[64px] px-4 bg-[#222] border border-[#444] text-[#888] hover:text-white hover:border-[#888] rounded transition-colors text-xs font-bold"
-                                >
-                                    MAX
-                                </button>
-                            </div>
+                            <div className="text-[#ffaa00] font-mono text-4xl mt-2">{gunpowder}</div>
                         </div>
                         
                         <div className="flex flex-col gap-3">
