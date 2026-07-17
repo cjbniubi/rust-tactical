@@ -13,21 +13,27 @@ export const useScrap = () => {
     const updateMaterial = store.updateMaterial;
     
 
+    const [purchaseMode, setPurchaseMode] = useState<'smoke' | 'f1' | 'scope'>('smoke');
+
     const grenadeCost = 8;
-    const f1Count = Math.floor(scrap / grenadeCost);
-    const f1Gp = f1Count * 15;
-    const f1Metal = f1Count * 15;
-
     const smokeCost = 5;
-    const smokeCount = Math.floor(scrap / smokeCost);
-    const smokeGp = smokeCount * 18; // 综合考虑安全区削弱，取常用保守值18或标准21，这里取21
-    const smokeMetal = smokeCount * 30;
-
-    const gunpowder = Math.max(f1Gp, smokeCount * 21);
-
     const scopeCost = 300;
-    const scopeCount = Math.floor(scrap / scopeCost);
-    const scopeHqm = scopeCount * 40; 
+
+    const potF1Count = Math.floor(scrap / grenadeCost);
+    const potF1Gp = potF1Count * 15;
+    const potF1Metal = potF1Count * 15;
+
+    const potSmokeCount = Math.floor(scrap / smokeCost);
+    const potSmokeGp = potSmokeCount * 21; 
+    const potSmokeMetal = potSmokeCount * 30;
+
+    const potScopeCount = Math.floor(scrap / scopeCost);
+    const potScopeHqm = potScopeCount * 40; 
+
+    // Actual selected yields
+    const gunpowder = purchaseMode === 'smoke' ? potSmokeGp : purchaseMode === 'f1' ? potF1Gp : 0;
+    const metalFragments = purchaseMode === 'smoke' ? potSmokeMetal : purchaseMode === 'f1' ? potF1Metal : 0;
+    const hqMetal = purchaseMode === 'scope' ? potScopeHqm : 0;
 
     const c4Count = Math.floor(gunpowder / 1000);
     const rocketCount = Math.floor(gunpowder / 650);
@@ -39,24 +45,28 @@ export const useScrap = () => {
         updateMaterial('scrap', num);
     };
 
-
     return {
         scrap,
-        f1Count,
-        f1Gp,
-        f1Metal,
-        smokeCount,
-        smokeGp: smokeCount * 21,
-        smokeMetal,
+        purchaseMode,
+        setPurchaseMode,
+        
+        potF1Count,
+        potF1Gp,
+        potSmokeCount,
+        potSmokeGp,
+        potScopeCount,
+        
         gunpowder,
-        scopeCount,
-        scopeHqm,
+        metalFragments,
+        hqMetal,
+        
         c4Count,
         rocketCount,
         satchelCount,
         expAmmoCount,
         grenadeCost,
         scopeCost,
+        smokeCost,
         handleScrapInput
     };
 };

@@ -8,8 +8,9 @@ import Image from 'next/image';
 
 export const DesktopScrap = (props: any) => {
     const {
-        scrap, f1Count, f1Gp, f1Metal, smokeCount, smokeGp, smokeMetal, gunpowder, scopeCount, scopeHqm,
-        c4Count, rocketCount, satchelCount, expAmmoCount, grenadeCost, scopeCost,
+        scrap, purchaseMode, setPurchaseMode, potF1Count, potF1Gp, potSmokeCount, potSmokeGp, potScopeCount,
+        gunpowder, metalFragments, hqMetal,
+        c4Count, rocketCount, satchelCount, expAmmoCount, grenadeCost, scopeCost, smokeCost,
         handleScrapInput
     } = props;
 
@@ -51,44 +52,54 @@ export const DesktopScrap = (props: any) => {
 
                         <div className="bg-[rgba(0,0,0,0.2)] border border-[rgba(255,255,255,0.05)] rounded-lg p-6 flex flex-col gap-4">
                             <h3 className="text-[#888] text-xs font-bold uppercase tracking-widest border-b border-[#333] pb-2">前哨站兑换凭证</h3>
-                            <div className="bg-[rgba(0,0,0,0.4)] border border-[#222] rounded p-4 flex items-center gap-4">
+                            <div 
+                                onClick={() => setPurchaseMode('smoke')}
+                                className={`bg-[rgba(0,0,0,0.4)] border ${purchaseMode === 'smoke' ? 'border-[#cd4916] bg-[rgba(205,73,22,0.1)] shadow-[0_0_15px_rgba(205,73,22,0.2)]' : 'border-[#222] hover:border-[#444]'} rounded p-4 flex items-center gap-4 cursor-pointer transition-all`}
+                            >
                                 <div className="w-12 h-12 bg-[#111] rounded flex items-center justify-center border border-[#333]">
                                     <Image src="/rust-icon/tools/grenade.smoke.png" alt="Smoke" width={32} height={32} />
                                 </div>
                                 <div className="flex-1">
                                     <div className="text-[#888] text-xs">烟雾弹 (最优性价比)</div>
-                                    <div className="font-bebas text-3xl text-white">{smokeCount}</div>
+                                    <div className="font-bebas text-3xl text-white">{potSmokeCount}</div>
                                 </div>
                                 <div className="text-right flex flex-col items-end">
-                                    <div className="text-[#cd4916] text-[10px] font-mono">5 Scrap/ea</div>
-                                    <div className="text-[#ffaa00] text-[10px] font-mono mt-1">产出: {smokeGp} GP</div>
+                                    <div className="text-[#cd4916] text-[10px] font-mono">{smokeCost} Scrap/ea</div>
+                                    <div className="text-[#ffaa00] text-[10px] font-mono mt-1">产出: {potSmokeGp} GP</div>
                                 </div>
                             </div>
                             
-                            <div className="bg-[rgba(0,0,0,0.4)] border border-[#222] rounded p-4 flex items-center gap-4">
+                            <div 
+                                onClick={() => setPurchaseMode('f1')}
+                                className={`bg-[rgba(0,0,0,0.4)] border ${purchaseMode === 'f1' ? 'border-[#cd4916] bg-[rgba(205,73,22,0.1)] shadow-[0_0_15px_rgba(205,73,22,0.2)]' : 'border-[#222] hover:border-[#444]'} rounded p-4 flex items-center gap-4 cursor-pointer transition-all`}
+                            >
                                 <div className="w-12 h-12 bg-[#111] rounded flex items-center justify-center border border-[#333]">
                                     <Image src="/rust-icon/weapons/grenade.f1.png" alt="F1" width={32} height={32} />
                                 </div>
                                 <div className="flex-1">
                                     <div className="text-[#888] text-xs">F1 手雷</div>
-                                    <div className="font-bebas text-3xl text-white">{f1Count}</div>
+                                    <div className="font-bebas text-3xl text-white">{potF1Count}</div>
                                 </div>
                                 <div className="text-right flex flex-col items-end">
                                     <div className="text-[#cd4916] text-[10px] font-mono">{grenadeCost} Scrap/ea</div>
-                                    <div className="text-[#ffaa00] text-[10px] font-mono mt-1">产出: {f1Gp} GP</div>
+                                    <div className="text-[#ffaa00] text-[10px] font-mono mt-1">产出: {potF1Gp} GP</div>
                                 </div>
                             </div>
                             
-                            <div className="bg-[rgba(0,0,0,0.4)] border border-[#222] rounded p-4 flex items-center gap-4">
+                            <div 
+                                onClick={() => setPurchaseMode('scope')}
+                                className={`bg-[rgba(0,0,0,0.4)] border ${purchaseMode === 'scope' ? 'border-[#00ffcc] bg-[rgba(0,255,204,0.1)] shadow-[0_0_15px_rgba(0,255,204,0.2)]' : 'border-[#222] hover:border-[#444]'} rounded p-4 flex items-center gap-4 cursor-pointer transition-all`}
+                            >
                                 <div className="w-12 h-12 bg-[#111] rounded flex items-center justify-center border border-[#333]">
                                     <Image src="/rust-icon/weapons/weapon.mod.8x.scope.png" alt="16x" width={32} height={32} />
                                 </div>
                                 <div className="flex-1">
                                     <div className="text-[#888] text-xs">16倍瞄准镜</div>
-                                    <div className="font-bebas text-3xl text-white">{scopeCount}</div>
+                                    <div className="font-bebas text-3xl text-white">{potScopeCount}</div>
                                 </div>
-                                <div className="text-right">
+                                <div className="text-right flex flex-col items-end">
                                     <div className="text-[#cd4916] text-[10px] font-mono">{scopeCost} Scrap/ea</div>
+                                    <div className="text-[#00ffcc] text-[10px] font-mono mt-1">产出: {potScopeCount * 40} HQM</div>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +119,7 @@ export const DesktopScrap = (props: any) => {
                                 <span className="text-[#888] text-sm mb-2 tracking-widest">提炼火药 (GP)</span>
                                 <span className="font-bebas text-6xl text-[#ffaa00]">{gunpowder}</span>
                                 <div className="mt-4 text-[#ffaa00] text-xs font-mono opacity-60 bg-[rgba(255,170,0,0.1)] px-3 py-1 rounded-full">
-                                    + {smokeMetal} 金属碎片 (按烟雾弹计)
+                                    + {metalFragments} 金属碎片
                                 </div>
                             </div>
 
@@ -116,7 +127,7 @@ export const DesktopScrap = (props: any) => {
                                 <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00ffcc] to-transparent opacity-50"></div>
                                 <Image src="/rust-icon/resources/metal.refined.png" alt="HQM" width={80} height={80} className="mb-6 drop-shadow-[0_0_15px_rgba(0,255,200,0.4)]" />
                                 <span className="text-[#888] text-sm mb-2 tracking-widest">提炼高金 (HQM)</span>
-                                <span className="font-bebas text-6xl text-[#00ffcc]">{scopeHqm}</span>
+                                <span className="font-bebas text-6xl text-[#00ffcc]">{hqMetal}</span>
                                 <div className="mt-4 text-[#00ffcc] text-xs font-mono opacity-60 bg-[rgba(0,255,200,0.1)] px-3 py-1 rounded-full">
                                     来自 16倍镜 分解
                                 </div>

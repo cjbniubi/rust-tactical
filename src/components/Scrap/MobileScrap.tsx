@@ -7,8 +7,9 @@ import Image from 'next/image';
 
 export const MobileScrap = (props: any) => {
     const {
-        scrap, f1Count, f1Gp, f1Metal, smokeCount, smokeGp, smokeMetal, gunpowder, scopeCount, scopeHqm,
-        c4Count, rocketCount, satchelCount, expAmmoCount, grenadeCost, scopeCost,
+        scrap, purchaseMode, setPurchaseMode, potF1Count, potF1Gp, potSmokeCount, potSmokeGp, potScopeCount,
+        gunpowder, metalFragments, hqMetal,
+        c4Count, rocketCount, satchelCount, expAmmoCount, grenadeCost, scopeCost, smokeCost,
         handleScrapInput
     } = props;
 
@@ -50,44 +51,53 @@ export const MobileScrap = (props: any) => {
                     
                     <div className="flex flex-col gap-2">
                         {/* Smoke Route */}
-                        <div className="bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] rounded p-3 flex items-center gap-3">
+                        <div 
+                            onClick={() => setPurchaseMode('smoke')}
+                            className={`bg-[rgba(255,255,255,0.02)] border ${purchaseMode === 'smoke' ? 'border-[#cd4916] bg-[rgba(205,73,22,0.1)]' : 'border-[rgba(255,255,255,0.05)]'} rounded p-3 flex items-center gap-3 transition-colors`}
+                        >
                             <Image src="/rust-icon/tools/grenade.smoke.png" alt="Smoke" width={28} height={28} />
                             <div className="flex-1 flex flex-col">
                                 <span className="text-[#888] text-[9px]">前哨站凭证(最优)</span>
-                                <span className="text-white font-bold text-sm leading-tight">{smokeCount}x 烟雾弹</span>
+                                <span className="text-white font-bold text-sm leading-tight">{potSmokeCount}x 烟雾弹</span>
                             </div>
                             <div className="text-[#555]">➔</div>
                             <div className="flex flex-col items-end">
                                 <span className="text-[#ffaa00] text-[9px]">提炼火药</span>
-                                <span className="font-bebas text-2xl text-[#ffaa00] leading-none">{smokeGp}</span>
+                                <span className="font-bebas text-2xl text-[#ffaa00] leading-none">{potSmokeGp}</span>
                             </div>
                         </div>
 
                         {/* F1 Route */}
-                        <div className="bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] rounded p-3 flex items-center gap-3">
+                        <div 
+                            onClick={() => setPurchaseMode('f1')}
+                            className={`bg-[rgba(255,255,255,0.02)] border ${purchaseMode === 'f1' ? 'border-[#cd4916] bg-[rgba(205,73,22,0.1)]' : 'border-[rgba(255,255,255,0.05)]'} rounded p-3 flex items-center gap-3 transition-colors`}
+                        >
                             <Image src="/rust-icon/weapons/grenade.f1.png" alt="F1" width={28} height={28} />
                             <div className="flex-1 flex flex-col">
                                 <span className="text-[#888] text-[9px]">前哨站购买凭证</span>
-                                <span className="text-white font-bold text-sm leading-tight">{f1Count}x F1手雷</span>
+                                <span className="text-white font-bold text-sm leading-tight">{potF1Count}x F1手雷</span>
                             </div>
                             <div className="text-[#555]">➔</div>
                             <div className="flex flex-col items-end">
                                 <span className="text-[#ffaa00] text-[9px]">提炼火药</span>
-                                <span className="font-bebas text-2xl text-[#ffaa00] leading-none">{f1Gp}</span>
+                                <span className="font-bebas text-2xl text-[#ffaa00] leading-none">{potF1Gp}</span>
                             </div>
                         </div>
 
                         {/* 16x Route */}
-                        <div className="bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] rounded p-3 flex items-center gap-3">
+                        <div 
+                            onClick={() => setPurchaseMode('scope')}
+                            className={`bg-[rgba(255,255,255,0.02)] border ${purchaseMode === 'scope' ? 'border-[#00ffcc] bg-[rgba(0,255,204,0.1)]' : 'border-[rgba(255,255,255,0.05)]'} rounded p-3 flex items-center gap-3 transition-colors`}
+                        >
                             <Image src="/rust-icon/weapons/weapon.mod.8x.scope.png" alt="16x" width={28} height={28} />
                             <div className="flex-1 flex flex-col">
                                 <span className="text-[#888] text-[9px]">前哨站购买凭证</span>
-                                <span className="text-white font-bold text-sm leading-tight">{scopeCount}x 16倍镜</span>
+                                <span className="text-white font-bold text-sm leading-tight">{potScopeCount}x 16倍镜</span>
                             </div>
                             <div className="text-[#555]">➔</div>
                             <div className="flex flex-col items-end">
                                 <span className="text-[#00ffcc] text-[9px]">提炼高面金</span>
-                                <span className="font-bebas text-2xl text-[#00ffcc] leading-none">{scopeHqm}</span>
+                                <span className="font-bebas text-2xl text-[#00ffcc] leading-none">{potScopeCount * 40}</span>
                             </div>
                         </div>
                     </div>
