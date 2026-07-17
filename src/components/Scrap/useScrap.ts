@@ -15,8 +15,15 @@ export const useScrap = () => {
 
     const grenadeCost = 8;
     const f1Count = Math.floor(scrap / grenadeCost);
-    const gunpowder = f1Count * 15;
+    const f1Gp = f1Count * 15;
     const f1Metal = f1Count * 15;
+
+    const smokeCost = 5;
+    const smokeCount = Math.floor(scrap / smokeCost);
+    const smokeGp = smokeCount * 18; // 综合考虑安全区削弱，取常用保守值18或标准21，这里取21
+    const smokeMetal = smokeCount * 30;
+
+    const gunpowder = Math.max(f1Gp, smokeCount * 21);
 
     const scopeCost = 300;
     const scopeCount = Math.floor(scrap / scopeCost);
@@ -36,8 +43,12 @@ export const useScrap = () => {
     return {
         scrap,
         f1Count,
-        gunpowder,
+        f1Gp,
         f1Metal,
+        smokeCount,
+        smokeGp: smokeCount * 21,
+        smokeMetal,
+        gunpowder,
         scopeCount,
         scopeHqm,
         c4Count,

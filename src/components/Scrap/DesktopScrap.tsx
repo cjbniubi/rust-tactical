@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 export const DesktopScrap = (props: any) => {
     const {
-        scrap, f1Count, gunpowder, f1Metal, scopeCount, scopeHqm,
+        scrap, f1Count, f1Gp, f1Metal, smokeCount, smokeGp, smokeMetal, gunpowder, scopeCount, scopeHqm,
         c4Count, rocketCount, satchelCount, expAmmoCount, grenadeCost, scopeCost,
         handleScrapInput
     } = props;
@@ -53,14 +53,29 @@ export const DesktopScrap = (props: any) => {
                             <h3 className="text-[#888] text-xs font-bold uppercase tracking-widest border-b border-[#333] pb-2">前哨站兑换凭证</h3>
                             <div className="bg-[rgba(0,0,0,0.4)] border border-[#222] rounded p-4 flex items-center gap-4">
                                 <div className="w-12 h-12 bg-[#111] rounded flex items-center justify-center border border-[#333]">
+                                    <Image src="/rust-icon/tools/grenade.smoke.png" alt="Smoke" width={32} height={32} />
+                                </div>
+                                <div className="flex-1">
+                                    <div className="text-[#888] text-xs">烟雾弹 (最优性价比)</div>
+                                    <div className="font-bebas text-3xl text-white">{smokeCount}</div>
+                                </div>
+                                <div className="text-right flex flex-col items-end">
+                                    <div className="text-[#cd4916] text-[10px] font-mono">5 Scrap/ea</div>
+                                    <div className="text-[#ffaa00] text-[10px] font-mono mt-1">产出: {smokeGp} GP</div>
+                                </div>
+                            </div>
+                            
+                            <div className="bg-[rgba(0,0,0,0.4)] border border-[#222] rounded p-4 flex items-center gap-4">
+                                <div className="w-12 h-12 bg-[#111] rounded flex items-center justify-center border border-[#333]">
                                     <Image src="/rust-icon/weapons/grenade.f1.png" alt="F1" width={32} height={32} />
                                 </div>
                                 <div className="flex-1">
                                     <div className="text-[#888] text-xs">F1 手雷</div>
                                     <div className="font-bebas text-3xl text-white">{f1Count}</div>
                                 </div>
-                                <div className="text-right">
+                                <div className="text-right flex flex-col items-end">
                                     <div className="text-[#cd4916] text-[10px] font-mono">{grenadeCost} Scrap/ea</div>
+                                    <div className="text-[#ffaa00] text-[10px] font-mono mt-1">产出: {f1Gp} GP</div>
                                 </div>
                             </div>
                             
@@ -93,7 +108,7 @@ export const DesktopScrap = (props: any) => {
                                 <span className="text-[#888] text-sm mb-2 tracking-widest">提炼火药 (GP)</span>
                                 <span className="font-bebas text-6xl text-[#ffaa00]">{gunpowder}</span>
                                 <div className="mt-4 text-[#ffaa00] text-xs font-mono opacity-60 bg-[rgba(255,170,0,0.1)] px-3 py-1 rounded-full">
-                                    + {f1Metal} 金属碎片
+                                    + {smokeMetal} 金属碎片 (按烟雾弹计)
                                 </div>
                             </div>
 

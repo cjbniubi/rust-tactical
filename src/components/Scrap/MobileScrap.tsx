@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 export const MobileScrap = (props: any) => {
     const {
-        scrap, f1Count, gunpowder, f1Metal, scopeCount, scopeHqm,
+        scrap, f1Count, f1Gp, f1Metal, smokeCount, smokeGp, smokeMetal, gunpowder, scopeCount, scopeHqm,
         c4Count, rocketCount, satchelCount, expAmmoCount, grenadeCost, scopeCost,
         handleScrapInput
     } = props;
@@ -49,6 +49,20 @@ export const MobileScrap = (props: any) => {
                     <h2 className="text-[#888] text-[10px] font-bold tracking-widest uppercase mb-3 border-b border-[#333] pb-1">转换提炼核心流水线</h2>
                     
                     <div className="flex flex-col gap-2">
+                        {/* Smoke Route */}
+                        <div className="bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] rounded p-3 flex items-center gap-3">
+                            <Image src="/rust-icon/tools/grenade.smoke.png" alt="Smoke" width={28} height={28} />
+                            <div className="flex-1 flex flex-col">
+                                <span className="text-[#888] text-[9px]">前哨站凭证(最优)</span>
+                                <span className="text-white font-bold text-sm leading-tight">{smokeCount}x 烟雾弹</span>
+                            </div>
+                            <div className="text-[#555]">➔</div>
+                            <div className="flex flex-col items-end">
+                                <span className="text-[#ffaa00] text-[9px]">提炼火药</span>
+                                <span className="font-bebas text-2xl text-[#ffaa00] leading-none">{smokeGp}</span>
+                            </div>
+                        </div>
+
                         {/* F1 Route */}
                         <div className="bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] rounded p-3 flex items-center gap-3">
                             <Image src="/rust-icon/weapons/grenade.f1.png" alt="F1" width={28} height={28} />
@@ -59,7 +73,7 @@ export const MobileScrap = (props: any) => {
                             <div className="text-[#555]">➔</div>
                             <div className="flex flex-col items-end">
                                 <span className="text-[#ffaa00] text-[9px]">提炼火药</span>
-                                <span className="font-bebas text-2xl text-[#ffaa00] leading-none">{gunpowder}</span>
+                                <span className="font-bebas text-2xl text-[#ffaa00] leading-none">{f1Gp}</span>
                             </div>
                         </div>
 
