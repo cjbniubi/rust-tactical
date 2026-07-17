@@ -2,7 +2,9 @@
 
 
 
-export const GpCraftCard = ({ name, count, cost, color }: { name: string, count: number, cost: string, color: string }) => {
+import Image from 'next/image';
+
+export const GpCraftCard = ({ name, count, cost, color, iconSrc }: { name: string, count: number, cost: string, color: string, iconSrc?: string }) => {
     const isActive = count > 0;
     return (
         <div className={`
@@ -10,7 +12,13 @@ export const GpCraftCard = ({ name, count, cost, color }: { name: string, count:
             ${isActive ? 'bg-[rgba(255,255,255,0.1)] border-[rgba(255,255,255,0.2)] shadow-[0_0_15px_rgba(255,255,255,0.05)]' : 'bg-[rgba(0,0,0,0.3)] border-transparent opacity-50'}
         `}>
             <div className="flex justify-between items-center">
-                <div className="w-8 h-8 bg-[rgba(0,0,0,0.4)] flex items-center justify-center rounded"></div>
+                <div className="w-10 h-10 bg-[rgba(0,0,0,0.4)] flex items-center justify-center rounded overflow-hidden">
+                    {iconSrc ? (
+                        <Image src={iconSrc} alt={name} width={40} height={40} className="object-contain" />
+                    ) : (
+                        <div className="w-8 h-8"></div>
+                    )}
+                </div>
                 <span className="font-bebas text-3xl" style={{ color: isActive ? color : '#666' }}>
                     {count}
                 </span>
